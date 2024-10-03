@@ -44,7 +44,7 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 
 	//TODO Set the value of this string constant properly.  This is the JNDI name
 	//     for the data source.
-	private static final String DATABANK_DS_JNDI = "java:app/jdbc/regionalInventory";
+	private static final String DATABANK_DS_JNDI = "java:app/jdbc/databank";
 	//TODO Set the value of this string constant properly.  This is the SQL
 	//     statement to retrieve the list of physicians from the database.
 	private static final String READ_ALL = "SELECT * FROM physician;";
@@ -53,7 +53,7 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 	private static final String READ_PHYSICIAN_BY_ID = "SELECT * FROM physician WHERE id = ? ";
 	//TODO Set the value of this string constant properly.  This is the SQL
 	//     statement to insert a new physician to the database.
-	private static final String INSERT_PHYSICIAN = "INSERT INTO physician (first_name,last_name,email,phone,specialty) VALUES (?,?,?,?,?)";
+	private static final String INSERT_PHYSICIAN = "INSERT INTO physician (first_name,last_name,email,phone,specialty,created) VALUES (?,?,?,?,?,now())";
 	//TODO Set the value of this string constant properly.  This is the SQL
 	//     statement to update the fields of a physician in the database.
 	private static final String UPDATE_PHYSICIAN_ALL_FIELDS = "UPDATE physician SET first_name=?,last_name=?,email=?,phone=?,specialty=? WHERE id=?";
@@ -71,7 +71,7 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 	//TODO Use the proper annotation here so that the correct data source object
 	//     will be injected
 	@Inject
-	@Resource(lookup="java:app/jdbc/regionalInventory")
+	@Resource(lookup="java:app/jdbc/databank")
 	protected DataSource databankDS;
 
 	protected Connection conn;
@@ -89,6 +89,10 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 			readAllPstmt = conn.prepareStatement(READ_ALL);
 			createPstmt = conn.prepareStatement(INSERT_PHYSICIAN, RETURN_GENERATED_KEYS);
 			//TODO Initialize other PreparedStatements here
+			readByIdPstmt = conn.prepareStatement(READ_PHYSICIAN_BY_ID);
+			updatePstmt = conn.prepareStatement(UPDATE_PHYSICIAN_ALL_FIELDS);
+			deleteByIdPstmt = conn.prepareStatement(DELETE_PHYSICIAN_BY_ID);
+					
 		} catch (Exception e) {
 			logMsg("something went wrong getting connection from database:  " + e.getLocalizedMessage());
 		}
@@ -101,7 +105,11 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 			readAllPstmt.close();
 			createPstmt.close();
 			//TODO Close other PreparedStatements here
+			readByIdPstmt.close();
+			updatePstmt.close();
+			deleteByIdPstmt.close();
 			conn.close();
+			
 		} catch (Exception e) {
 			logMsg("something went wrong closing stmts or connection:  " + e.getLocalizedMessage());
 		}
@@ -118,6 +126,10 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 				newPhysician.setId(rs.getInt("id"));
 				newPhysician.setLastName(rs.getString("last_name"));
 				//TODO Complete the physician initialization here
+				newPhysician.setFirstName(rs.getString("first_name"));
+				newPhysician.setEmail(rs.getString("email"));
+				newPhysician.setPhoneNumber(rs.getString("phone"));
+				newPhysician.setSpecialty(rs.getString("specialty"));
 				physicians.add(newPhysician);
 			}
 			
@@ -134,7 +146,18 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 		logMsg("creating a physician");
 		//TODO Complete the insertion of a new physician here
 		//TODO Be sure to use try-and-catch statement
-		return null;
+		try {
+			createPstmt.setString(1, physician.getFirstName());
+			createPstmt.setString(2, physician.getLastName());
+			createPstmt.setString(3, physician.getEmail());
+			createPstmt.setString(4, physician.getPhoneNumber());
+			createPstmt.setString(5, physician.getSpecialty());
+			createPstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			logMsg("something went wrong creating physician"+ e.getLocalizedMessage());
+		}
+		return physician;
 	}
 
 	@Override
@@ -142,6 +165,9 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 		logMsg("read a specific physician");
 		//TODO Complete the retrieval of a specific physician by its id here
 		//TODO Be sure to use try-and-catch statement
+		PhysicianPojo physician = null;
+		
+		
 		return null;
 	}
 
