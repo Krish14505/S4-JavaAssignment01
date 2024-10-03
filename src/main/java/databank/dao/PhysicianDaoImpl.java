@@ -167,8 +167,26 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 		//TODO Be sure to use try-and-catch statement
 		PhysicianPojo physician = null;
 		
+		try {
+			readByIdPstmt.setInt(1, physicianId);
+			ResultSet rs = readByIdPstmt.executeQuery();
+			
+			if(rs.next()) {
+				physician = new PhysicianPojo();
+				physician.setId(rs.getInt("id"));
+				physician.setFirstName(rs.getString("first_name"));
+				physician.setLastName(rs.getString("last_name"));
+				physician.setEmail(rs.getString("email"));
+				physician.setPhoneNumber(rs.getString("phone"));
+				physician.setSpecialty(rs.getString("specialty"));
+			}
+			
+		}catch(SQLException e){
+			logMsg("something went wrong while retrieving physician by id: "+ e.getLocalizedMessage());
+		}
 		
-		return null;
+		
+		return physician;
 	}
 
 	@Override
@@ -176,13 +194,33 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 		logMsg("updating a specific physician");
 		//TODO Complete the update of a specific physician here
 		//TODO Be sure to use try-and-catch statement
+		try {
+			updatePstmt.setString(1, physician.getFirstName());
+			updatePstmt.setString(2, physician.getLastName());
+			updatePstmt.setString(3, physician.getEmail());
+			updatePstmt.setString(4, physician.getPhoneNumber());
+			updatePstmt.setString(5, physician.getSpecialty());
+			updatePstmt.setInt(6, physician.getId());
+			updatePstmt.executeUpdate();
+			
+		}catch(SQLException exception) {
+			logMsg("something went wrong when updating physician: "+ exception.getLocalizedMessage());
+		}
+		
 	}
 
 	@Override
 	public void deletePhysicianById(int physicianId) {
 		logMsg("deleting a specific physician");
-		//TODO Complete the deletion of a specific physician here
-		//TODO Be sure to use try-and-catch statement
+		
+		try {
+			deleteByIdPstmt.setInt(1, physicianId);
+			deleteByIdPstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			logMsg("something went wrong when deleting physician: " + e.getLocalizedMessage());
+		}
+		
 	}
 
 }
