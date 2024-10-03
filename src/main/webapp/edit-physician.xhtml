@@ -15,10 +15,41 @@
     <!-- Title of tab/window in browser -->
     <title>#{uiconsts['updateLabel']}</title>
   </h:head>
+  
   <h:body>
     <h2>#{uiconsts['updateLabel']}</h2>
     <br/>
-    <p>Update a physician here.  You can use "h:panelGrid", "h:outputText", "h:inputText", "h:selectOneMenu", "f:selectItems", "h:commandButton", and "h:form"</p>
+    <p>Update a physician here.</p>
+    
+    <h:form>
+    	<h:panelGrid columns="2">
+    		
+    		<h:outputLabel for="firstName" value="#{uiconsts.columnLabel_FirstName"/>
+    		<h:inputText id="firstName" value="#{sessionMap['currentPhysician'].firstName}" required="true"/>
+    		
+    		<h:outputLabel for="lastName" value="#{uiconsts.columnLabel_LastName"/>
+    		<h:inputText id="lastName" value="#{sessionMap['currentPhysician'].lastName}" required="true"/>
+    		
+    		<h:outputLabel for="email" value="#{uiconsts.columnLabel_Email"/>
+    		<h:inputText id="email" value="#{sessionMap['currentPhysician'].email}" required="true"/>
+    		
+    		<h:outputLabel for="phoneNumber" value="#{uiconsts.columnLabel_PhoneNumber"/>
+    		<h:inputText id="phoneNumber" value="#{sessionMap['currentPhysician'].phoneNumber}" required="true"/>
+    		
+    	
+    		<h:outputLabel for="specialty" value ="#uiconst.columnLabel_Specialty" />
+    		<h:selectOneMenu id="specialty" value="#{sessionMap['currentPhysician'].specialty}" required="true">
+    			<f:selectItems value="#{physicianController.specialties}" var="specialty" itemValue="#{specialty}" itemLabel="#{specialty}"/>
+    		</h:selectOneMenu>
+    	
+    	
+    	</h:panelGrid>
+    
+    	<h:commandButton value="#{uiconsts.submitButtonLabel}" action="#{physicianController.submitUpdatedPhysician(sessionMap['currentPhysician'])}"/>
+    	<h:commandButton value="#{uiconsts.cancelButtonLabel}" actions="list-physicians.xhtml"></h:commandButton>
+    
+    </h:form>
+    
     <h:outputLink value="list-physicians.xhtml">Back</h:outputLink>
   </h:body>
 </html>
