@@ -70,7 +70,7 @@ public class PhysicianController implements Serializable {
 		return "add-physician.xhtml?faces-redirect=true";
 	}
 
-	public String submitPhysician(PhysicianPojo physician) {
+	public String submitButtonLabel(PhysicianPojo physician) {
 		//TODO Update the physician object with current date here.  You can use LocalDateTime::now().
 		physician.setCreated(LocalDateTime.now());
 		
