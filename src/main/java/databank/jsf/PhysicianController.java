@@ -8,11 +8,14 @@
 package databank.jsf;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.annotation.SessionMap;
 import jakarta.inject.Inject;
-
+import jakarta.inject.Named;
 import databank.dao.ListDataDao;
 import databank.dao.PhysicianDao;
 import databank.model.PhysicianPojo;
@@ -23,11 +26,15 @@ import databank.model.PhysicianPojo;
  */
 
 //TODO Don't forget this is a managed bean with a session scope
+@Named
+@SessionScoped
 public class PhysicianController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	//TODO Use the proper annotations here so that this session map object will be 
 	//     injected.  Please refer to Week 3 sample project to know how this is to be done. 
+	@Inject
+	@SessionMap
 	private Map<String, Object> sessionMap;
 
 	@Inject
@@ -65,28 +72,37 @@ public class PhysicianController implements Serializable {
 
 	public String submitPhysician(PhysicianPojo physician) {
 		//TODO Update the physician object with current date here.  You can use LocalDateTime::now().
+		physician.setCreated(LocalDateTime.now());
+		
 		//TODO Use DAO to insert the physician to the database
+		physicianDao.createPhysician(physician);
 		//TODO Do not forget to navigate the user back to list-physicians.xhtml
-		return null;
+		return "list-physicians.xhtml?faces-redirect=true";
 	}
 
 	public String navigateToUpdateForm(int physicianId) {
 		//TODO Use DAO to find the physician object from the database first
+		PhysicianPojo physician = physicianDao.readPhysicianById(physicianId);
 		//TODO Use session map to keep track of of the object being edited
+		sessionMap.put("currentPhysician", physician);
+		
 		//TODO Do not forget to navigate the user to the edit/update form
-		return null;
+		return "edit-physician.xhtml?faces-redirect=true";
 	}
 
 	public String submitUpdatedPhysician(PhysicianPojo physician) {
 		//TODO Use DAO to update the physician in the database
+		physicianDao.updatePhysician(physician);
 		//TODO Do not forget to navigate the user back to list-physicians.xhtml
-		return null;
+		
+		return "list-physicians.xhtml?faces-redirect=true";
 	}
 
 	public String deletePhysician(int physicianId) {
 		//TODO Use DAO to delete the physician from the database
+		physicianDao.deletePhysicianById(physicianId);
 		//TODO Do not forget to navigate the user back to list-physicians.xhtml
-		return null;
+		return "list-physicians.xhtml?faces-redirect=true";
 	}
 
 }
