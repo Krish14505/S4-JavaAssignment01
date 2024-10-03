@@ -130,9 +130,6 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 				newPhysician.setEmail(rs.getString("email"));
 				newPhysician.setPhoneNumber(rs.getString("phone"));
 				newPhysician.setSpecialty(rs.getString("specialty"));
-				
-				LocalDateTime createdDate = rs.getTimestamp("created").toLocalDateTime();
-			    newPhysician.setCreated(createdDate);
 				physicians.add(newPhysician);
 			}
 			

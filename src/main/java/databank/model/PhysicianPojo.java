@@ -8,7 +8,6 @@
 package databank.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
