@@ -82,5 +82,6 @@ public class ListDataDaoImpl implements ListDataDao, Serializable {
 		return specialties;
 
 	}
-
+	
+	
 }
