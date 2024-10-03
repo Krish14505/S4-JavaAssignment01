@@ -39,6 +39,14 @@ public interface Physician {
 	public String setPhone(String phone);
 	
 	
+	/**
+	 * 
+	 * @return specialty of the physician
+	 */
+	public String getSpecialty();
+	public String setSpecialty(String specialty);
+	
+	
 	
 	
 	
