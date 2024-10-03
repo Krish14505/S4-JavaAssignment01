@@ -9,6 +9,7 @@ package databank.dao;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
+
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,8 +20,11 @@ import java.util.List;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.context.ExternalContext;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.servlet.ServletContext;
 import javax.sql.DataSource;
 
@@ -31,28 +35,31 @@ import databank.model.PhysicianPojo;
  * Description:  Implements the C-R-U-D API for the database
  */
 //TODO Don't forget this is a managed bean with an application scope
+
+@Named
+@ApplicationScoped
 public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 	/** Explicitly set serialVersionUID */
 	private static final long serialVersionUID = 1L;
 
 	//TODO Set the value of this string constant properly.  This is the JNDI name
 	//     for the data source.
-	private static final String DATABANK_DS_JNDI = null;
+	private static final String DATABANK_DS_JNDI = "java:app/jdbc/regionalInventory";
 	//TODO Set the value of this string constant properly.  This is the SQL
 	//     statement to retrieve the list of physicians from the database.
-	private static final String READ_ALL = null;
-	//TODO Set the value of this string constant properly.  This is the SQL
+	private static final String READ_ALL = "SELECT * FROM physician;";
+	//TODO Set the value of this strincaht constant properly.  This is the SQL
 	//     statement to retrieve a physician by ID from the database.
-	private static final String READ_PHYSICIAN_BY_ID = null;
+	private static final String READ_PHYSICIAN_BY_ID = "SELECT * FROM physician WHERE id = ? ";
 	//TODO Set the value of this string constant properly.  This is the SQL
 	//     statement to insert a new physician to the database.
-	private static final String INSERT_PHYSICIAN = null;
+	private static final String INSERT_PHYSICIAN = "INSERT INTO physician (first_name,last_name,email,phone,specialty) VALUES (?,?,?,?,?)";
 	//TODO Set the value of this string constant properly.  This is the SQL
 	//     statement to update the fields of a physician in the database.
-	private static final String UPDATE_PHYSICIAN_ALL_FIELDS = null;
+	private static final String UPDATE_PHYSICIAN_ALL_FIELDS = "UPDATE physician SET first_name=?,last_name=?,email=?,phone=?,specialty=? WHERE id=?";
 	//TODO Set the value of this string constant properly.  This is the SQL
 	//     statement to delete a physician from the database.
-	private static final String DELETE_PHYSICIAN_BY_ID = null;
+	private static final String DELETE_PHYSICIAN_BY_ID = "DELETE FROM physician WHERE id = ?";
 
 	@Inject
 	protected ExternalContext externalContext;
@@ -63,6 +70,8 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 
 	//TODO Use the proper annotation here so that the correct data source object
 	//     will be injected
+	@Inject
+	@Resource(lookup="java:app/jdbc/regionalInventory")
 	protected DataSource databankDS;
 
 	protected Connection conn;

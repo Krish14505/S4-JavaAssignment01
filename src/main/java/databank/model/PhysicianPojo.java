@@ -29,6 +29,7 @@ public class PhysicianPojo implements Serializable {
 	protected String email;
 	protected String phoneNumber;
 	//TODO Add a field to store the specialty of the physician
+	protected String specialty;
 	protected LocalDateTime created;
 
 	public PhysicianPojo() {
@@ -91,6 +92,13 @@ public class PhysicianPojo implements Serializable {
 	}
 
 	//TODO Add getter and setter methods for the specialty field here
+	public String getSpecialty() {
+		return specialty;
+	}
+	
+	public void setSpecialty(String specialty) {
+		this.specialty = specialty;
+	}
 	
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
@@ -156,6 +164,12 @@ public class PhysicianPojo implements Serializable {
 		}
 		//TODO Add code to append the specialty field
 		builder.append("]");
+		if(getSpecialty() != null) {
+			builder.append("Specialty = ").append(getSpecialty()).append(",");
+		}
+		
+		builder.append("]");
+		
 		return builder.toString();
 	}
 

@@ -20,9 +20,11 @@ public interface PhysicianDao {
 	public PhysicianPojo createPhysician(PhysicianPojo physician);
 
 	// R
+	public List<PhysicianPojo> readAllPhysicians();
+	
 	public PhysicianPojo readPhysicianById(int physicianId);
 
-	public List<PhysicianPojo> readAllPhysicians();
+	
 
 	// U
 	public void updatePhysician(PhysicianPojo physician);
