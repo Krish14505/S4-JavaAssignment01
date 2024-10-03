@@ -8,6 +8,7 @@
 package databank.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -100,8 +101,8 @@ public class PhysicianPojo implements Serializable {
 		this.specialty = specialty;
 	}
 	
-	public void setCreated(LocalDateTime created) {
-		this.created = created;
+	public void setCreated(LocalDateTime date) {
+		this.created = date;
 	}
 
 	public LocalDateTime getCreated() {
