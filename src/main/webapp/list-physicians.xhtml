@@ -91,7 +91,7 @@
          -->
          <h:column>
            <f:facet name="header">#{uiconsts['columnLabel_Action']}</f:facet>
-           <h:commandButton value="#{uiconsts['editButtonLabel']}" action = "edit-physician.xhtml?physicianId=#{physician.id}" />
+           <h:commandButton value="#{uiconsts['editButtonLabel']}" action = "#{physicianController.navigateToUpdateForm(physician.id)}" />
            &#160;
            <h:commandButton value="#{uiconsts['deleteButtonLabel']}"
              onclick="if (!confirm('#{uiconsts.rus}')) return false"

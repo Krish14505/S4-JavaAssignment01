@@ -27,26 +27,26 @@
     
     <h:panelGrid columns="2">
     
-    	<h:outputLabel for="firstName" value ="#uiconst.columnLabel_FirstName" />
-    	<h:inputText id="firstName" value="#{sessionMap['newPhysician'].firstName" required="true"></h:inputText>
+    	<h:outputLabel for="firstName" value ="#{uiconst.columnLabel_FirstName}" />
+    	<h:inputText id="firstName" value="#{newPhysician.firstName" required="true"></h:inputText>
     
-    	<h:outputLabel for="lastName" value ="#uiconst.columnLabel_LastName" />
-   		<h:inputText id="lastName" value="#{sessionMap['newPhysician'].lastName"></h:inputText>
+    	<h:outputLabel for="lastName" value ="#{uiconst.columnLabel_LastName}" />
+   		<h:inputText id="lastName" value="#{newPhysician.lastName"></h:inputText>
     
-    	<h:outputLabel for="email" value ="#uiconst.columnLabel_Email" />
-    	<h:inputText id="email" value="#{sessionMap['newPhysician'].email"></h:inputText>
+    	<h:outputLabel for="email" value ="#{uiconst.columnLabel_Email}" />
+    	<h:inputText id="email" value="#{newPhysician.email"></h:inputText>
     
-   		<h:outputLabel for="phoneNumber" value ="#uiconst.columnLabel_PhoneNumber" />
-   		<h:inputText id="phoneNumber" value="#{sessionMap['newPhysician'].phoneNumber"></h:inputText>
+   		<h:outputLabel for="phoneNumber" value ="#{uiconst.columnLabel_PhoneNumber}" />
+   		<h:inputText id="phoneNumber" value="#{newPhysician.phoneNumber"></h:inputText>
     
-    	<h:outputLabel for="specialty" value ="#uiconst.columnLabel_Specialty" />
-    	<h:selectOneMenu id="specialty" value="#{sessionMap['newPhysician'].specialty}" required="true">
+    	<h:outputLabel for="specialty" value ="#{uiconst.columnLabel_Specialty}" />
+    	<h:selectOneMenu id="specialty" value="#{newPhysician.specialty}" required="true">
     		<f:selectItems value="#{physicianController.specialties}" var="specialty" itemValue="#{specialty}" itemLabel="#{specialty}"/>
     	</h:selectOneMenu>
     
     </h:panelGrid>
     
-    	<h:commandButton value="#{uiconsts.submitButtonLabel}" action ="#{physicianController.submitButtonLabel(sessionMap['newPhysician'])}"/>
+    	<h:commandButton value="#{uiconsts.submitButtonLabel}" action ="#{physicianController.submitButtonLabel(newPhysician)}"/>
     	<h:outputLink value="list-physician.xhtml"> Back to list </h:outputLink>
     
     </h:form>

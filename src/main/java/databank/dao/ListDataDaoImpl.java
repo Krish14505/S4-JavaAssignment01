@@ -6,6 +6,7 @@
 package databank.dao;
 
 import java.io.Serializable;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,7 +55,7 @@ public class ListDataDaoImpl implements ListDataDao, Serializable {
 
 	//TODO Use the proper annotation here so that the correct data source object
 	//     will be injected
-	@Resource(lookup = "java:app/jdbc/databank")
+	@Resource(lookup = DATABANK_DS_JNDI)
 	protected DataSource databankDS;
 
 	protected Connection conn;

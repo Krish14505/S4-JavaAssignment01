@@ -70,8 +70,7 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 
 	//TODO Use the proper annotation here so that the correct data source object
 	//     will be injected
-	@Inject
-	@Resource(lookup="java:app/jdbc/databank")
+	@Resource(lookup=DATABANK_DS_JNDI)
 	protected DataSource databankDS;
 
 	protected Connection conn;
