@@ -15,20 +15,20 @@ public interface Physician {
 	 * @return the first name of the physician
 	 */
 	public String getFirstName();
-	public String setFirstName(String firstname);
+	public void setFirstName(String firstname);
 
 	/**
 	 * @return the last name of the physician
 	 */
 	public String getLastName();
-	public String setLastName(String lastname);
+	public void setLastName(String lastname);
 	
 	/**
 	 * 
 	 * @return email of the physician
 	 */
 	public String getEmail();
-	public String setEmail(String email);
+	public void setEmail(String email);
 	
 	
 	/**
@@ -36,7 +36,7 @@ public interface Physician {
 	 * @return phone number of the physician
 	 */
 	public String getPhone();
-	public String setPhone(String phone);
+	public void setPhone(String phone);
 	
 	
 	/**
@@ -44,7 +44,7 @@ public interface Physician {
 	 * @return specialty of the physician
 	 */
 	public String getSpecialty();
-	public String setSpecialty(String specialty);
+	public void setSpecialty(String specialty);
 	
 	
 	
