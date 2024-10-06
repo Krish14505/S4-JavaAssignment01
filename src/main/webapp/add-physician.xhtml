@@ -29,7 +29,12 @@
 
     
     	<h:outputLabel for="firstName" value ="#{uiconsts.columnLabel_FirstName}" />
-    	<h:inputText id="firstName" value="#{newPhysician.firstName}" required="true"></h:inputText>
+    	<h:inputText id="firstName" value="#{newPhysician.firstName}" required="true">
+
+            <f:validateLength minimum = "5" maximum="30"/>
+            <f:validatorMessage></f:validatorMessage>
+        </h:inputText>
+        <h:message for = "firstName" style = "color:red"/>
     										
     	<h:outputLabel for="lastName" value ="#{uiconsts.columnLabel_LastName}" />
    		<h:inputText id="lastName" value="#{newPhysician.lastName}" required="true"></h:inputText>
