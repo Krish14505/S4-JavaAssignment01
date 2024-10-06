@@ -29,22 +29,29 @@
 
     
     	<h:outputLabel for="firstName" value ="#{uiconsts.columnLabel_FirstName}" />
-    	<h:inputText id="firstName" value="#{newPhysician.firstName}" required="true">
+    	<h:inputText id="firstName" value="#{newPhysician.firstName}" required="true" />
+        <span id="firstNameError" style="color:red"/>
 
-            <f:validateLength minimum = "5" maximum="30"/>
-            <f:validatorMessage></f:validatorMessage>
-        </h:inputText>
-        <h:message for = "firstName" style = "color:red"/>
-    										
+        <br/>
     	<h:outputLabel for="lastName" value ="#{uiconsts.columnLabel_LastName}" />
-   		<h:inputText id="lastName" value="#{newPhysician.lastName}" required="true"></h:inputText>
-    
-    	<h:outputLabel for="email" value ="#{uiconsts.columnLabel_Email}" />
-    	<h:inputText id="email" value="#{newPhysician.email}" required="true"></h:inputText>
-    
+   		<h:inputText id="lastName" value="#{newPhysician.lastName}" required="true" />
+        <span id="lastNameError" style="color:red"/>
+
+        <br/>
+        
+        <h:outputLabel for="email" value ="#{uiconsts.columnLabel_Email}" />
+    	<h:inputText id="email" value="#{newPhysician.email}" required="true" />
+        <span id="emailAddressError" style="color:red"/>
+
+
+        <br/>
+        
    		<h:outputLabel for="phoneNumber" value ="#{uiconsts.columnLabel_PhoneNumber}" />
-   		<h:inputText id="phoneNumber" value="#{newPhysician.phoneNumber}" required="true"></h:inputText>
-    
+   		<h:inputText id="phoneNumber" value="#{newPhysician.phoneNumber}" required="true"/>
+        <span id="PhoneNumberError" style="color:red"/>
+
+        <br/>
+
     	<h:outputLabel for="specialty" value ="#{uiconsts.columnLabel_Specialty}" />
     	<h:selectOneMenu id="specialty" value="#{newPhysician.specialty}" required="true">
     		<f:selectItems value="#{physicianController.specialties}" var="specialty" itemValue="#{specialty}" itemLabel="#{specialty}"/>
@@ -58,4 +65,6 @@
     </h:form>
     
   </h:body>
+
+
 </html>
