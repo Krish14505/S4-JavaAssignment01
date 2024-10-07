@@ -127,13 +127,17 @@ public class PhysicianDaoImpl implements PhysicianDao, Serializable {
 				newPhysician.setLastName(rs.getString("last_name"));
 				//TODO Complete the physician initialization here
 				newPhysician.setFirstName(rs.getString("first_name"));
+				logMsg("Physician Last name:" + newPhysician.getLastName());
 				newPhysician.setEmail(rs.getString("email"));
 				newPhysician.setPhoneNumber(rs.getString("phone"));
 				newPhysician.setCreated(rs.getTimestamp("created").toLocalDateTime());
 				newPhysician.setSpecialty(rs.getString("specialty"));
 				
+				//Debugging the created column to make sure that the values are coming from the database correctly
+				logMsg("Physician created date: " + newPhysician.getCreated());
 				
-				physicians.add(newPhysician);
+				
+				physicians.add(newPhysician); // add that physician instance to the list
 			}
 			
 		} catch (SQLException e) {
