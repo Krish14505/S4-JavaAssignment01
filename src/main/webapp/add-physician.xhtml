@@ -32,24 +32,15 @@
     	<h:inputText id="firstName" value="#{newPhysician.firstName}" required="true" />
 
 
-        <br/>
     	<h:outputLabel for="lastName" value ="#{uiconsts.columnLabel_LastName}" />
    		<h:inputText id="lastName" value="#{newPhysician.lastName}" required="true" />
 
 
-        <br/>
-        
         <h:outputLabel for="email" value ="#{uiconsts.columnLabel_Email}" />
     	<h:inputText id="email" value="#{newPhysician.email}" required="true" />
 
-
-
-        <br/>
-        
    		<h:outputLabel for="phoneNumber" value ="#{uiconsts.columnLabel_PhoneNumber}" />
    		<h:inputText id="phoneNumber" value="#{newPhysician.phoneNumber}" required="true"/>
-
-        <br/>
 
     	<h:outputLabel for="specialty" value ="#{uiconsts.columnLabel_Specialty}" />
     	<h:selectOneMenu id="specialty" value="#{newPhysician.specialty}" required="true">
