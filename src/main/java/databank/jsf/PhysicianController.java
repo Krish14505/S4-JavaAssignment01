@@ -47,10 +47,6 @@ public class PhysicianController implements Serializable {
 
 	//Necessary methods to make controller work
 
-	public void loadPhysicians() {
-		setPhysicians(physicianDao.readAllPhysicians());
-	}
-
 	public List<PhysicianPojo> getPhysicians() {
 		return physicians;
 	}
@@ -58,6 +54,12 @@ public class PhysicianController implements Serializable {
 	public void setPhysicians(List<PhysicianPojo> physicians) {
 		this.physicians = physicians;
 	}
+
+	public void loadPhysicians() {
+		setPhysicians(physicianDao.readAllPhysicians());
+	}
+
+
 
 	public List<String> getSpecialties() {
 		return this.listDataDao.readAllSpecialties();
